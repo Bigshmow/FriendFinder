@@ -1,0 +1,20 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "Friend_Finder_App",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bigshmow/FriendFinder.git"
+  },
+  "author": "Devin Stewart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bigshmow/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/Bigshmow/FriendFinder#readme"
+}
