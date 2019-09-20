@@ -32,7 +32,7 @@
         <div class="jumbotron" id="questionDiv">
 
         </div>
-        
+
         <br><br>
 
         <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
@@ -46,7 +46,6 @@
     </footer>
 
     <script>
-
         var questionArr = [{
                 number: 1,
                 question: "Your mind is always buzzing with unexplored ideas and plans."
@@ -57,7 +56,7 @@
             },
             {
                 number: 3,
-                question: "You would rather be at the beach than up in the mountains."                
+                question: "You would rather be at the beach than up in the mountains."
             },
             {
                 number: 4,
@@ -88,41 +87,67 @@
                 question: "You enjoyed this little survey."
             }
         ]
-        
+
         for (let i = 0; i < questionArr.length; i++) {
-            
-            
+
+
             var questionNumber = "<h3> Question #" + questionArr[i].number + "</h3>";
             var question = "<h4>" + questionArr[i].question + "</h4>";
-            var answerOption = "<select data-placeholder='' class='chosen-value' id=" + questionArr[i].number + ">"
-                    + "<option value=''></option>"
-                    + "<option value='1'>1 (Strongly Disagree)</option>"
-                    + "<option value='2'>2</option>"
-                    + "<option value='3'>3</option>"
-                    + "<option value='4'>4</option>"
-                    + "<option value='5'>5 (Strongly Agree)</option>";    
+            var answerOption = "<select data-placeholder='' class='chosen-value' id=q" + questionArr[i].number + ">" +
+                "<option value=''></option>" +
+                "<option value='1'>1 (Strongly Disagree)</option>" +
+                "<option value='2'>2</option>" +
+                "<option value='3'>3</option>" +
+                "<option value='4'>4</option>" +
+                "<option value='5'>5 (Strongly Agree)</option>";
             var newDiv = $("<div>");
             $("#questionDiv").append(newDiv).append(questionNumber).append(question).append(answerOption);
         }
 
-        $("#submit").on("click", function(){
-        function validateForm() {
-            var isValid = true;
-            $(".form-control").each(function(){
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
+        $(document).on("click","#submit", function () {
+            function validateForm() {
+                var isValid = true;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
 
-            $(".chosen-value").each(function(){
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-        }
-    })
+                $(".chosen-value").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
 
+            if (validateForm()) {
 
+                var newFriend = {
+                        name: $("#name").val(),
+                        photo: $("#photo").val(),
+                        scores: [
+                            $("#q1").val(),
+                            $("#q2").val(),
+                            $("#q3").val(),
+                            $("#q4").val(),
+                            $("#q5").val(),
+                            $("#q6").val(),
+                            $("#q7").val(),
+                            $("#q8").val(),
+                            $("#q9").val(),
+                            $("#q10").val()
+                        ]
+                    };
+
+                var currentURL = window.location.origin;
+
+                $.post(currentURL + "/api/friends",newFriend,function(data){
+                    console.log(newFriend);
+                });
+                
+            }
+        })
     </script>
 
 </body>
