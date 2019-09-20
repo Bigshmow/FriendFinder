@@ -1,17 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <title>Survey</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/server.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4..6.1/css/font-awesome.min.css">
+    <title>SurveyPage</title>
 </head>
+
 <body>
-    <h1>Hello World...Survey Page</h1>
     <a href="/home">Home Page</a>
-    <a href="/survey">Survey Page</a>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="header">Survey Questions</h1>
+            <br>
+            <h2 class="">A little about you first:</h2>
+            <h3 class="">Name</h3>
+            <input type="text" class="form-control" id="name">
+
+            <h3 class="">Link to an image of you</h3>
+            <input type="text" class="form-control" id="photo">
+        </div>
+        <div class="jumbotron" id="questionDiv">
+
+        </div>
+        
+        <br><br>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p><a href="api/friends">API Friends List</a></p>
+        </div>
+    </footer>
+
+    <script>
+        var questionArr = [{
+                number: 1,
+                question: "Your mind is always buzzing with unexplored ideas and plans."
+            },
+            {
+                number: 2,
+                question: "You enjoy the great outdoors."
+            },
+            {
+                number: 3,
+                question: "You would rather be at the beach than up in the mountains."                
+            },
+            {
+                number: 4,
+                question: "The idea of a best friend appeals to you."
+            },
+            {
+                number: 5,
+                question: "Owning a pet is necessary to a full life."
+            },
+            {
+                number: 6,
+                question: "You enjoy the company of dogs over cats."
+            },
+            {
+                number: 7,
+                question: "You enjoy junk food more than health food."
+            },
+            {
+                number: 8,
+                question: "On a typical day you get plenty of exercise."
+            },
+            {
+                number: 9,
+                question: "Alcohol is your drink of choice."
+            },
+            {
+                number: 10,
+                question: "You enjoyed this little survey."
+            }
+        ]
+        
+        for (let i = 0; i < questionArr.length; i++) {
+            
+            
+            var questionNumber = "<h3> Question #" + questionArr[i].number + "</h3>";
+            var question = "<h4>" + questionArr[i].question + "</h4>";
+            var answerOption = "<select data-placeholder='' class='chosen-select' id=" + questionArr[i].number + ">"
+                    + "<option value=''></option>"
+                    + "<option value='1'>1 (Strongly Disagree)</option>"
+                    + "<option value='2'>2</option>"
+                    + "<option value='3'>3</option>"
+                    + "<option value='4'>4</option>"
+                    + "<option value='5'>5 (Strongly Agree)</option>";    
+            var newDiv = $("<div>");
+            $("#questionDiv").append(newDiv).append(questionNumber).append(question).append(answerOption);
+        }
+
+
+    </script>
+
 </body>
+
 </html>
