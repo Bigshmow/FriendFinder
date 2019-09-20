@@ -35,7 +35,7 @@
 
         <br><br>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Submit</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit" data-toggle="modal" data-target="#submitAnswers">Submit</button>
 
     </div>
 
@@ -44,6 +44,27 @@
             <p><a href="api/friends">API Friends List</a></p>
         </div>
     </footer>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="submitAnswers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title" id="exampleModalLongTitle">Here's your best match!</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h3 id = "matchName"></h3>
+                <img id = "matchImage" src = "#" alt = "Best Match Picture">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <script>
         var questionArr = [{
@@ -144,6 +165,8 @@
 
                 $.post(currentURL + "/api/friends",newFriend,function(data){
                     console.log(newFriend);
+                    $("#matchName").text(data.name);
+                    $("#matchImage").attr("src",data.photo);
                 });
                 
             }
