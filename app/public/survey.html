@@ -46,6 +46,7 @@
     </footer>
 
     <script>
+
         var questionArr = [{
                 number: 1,
                 question: "Your mind is always buzzing with unexplored ideas and plans."
@@ -93,7 +94,7 @@
             
             var questionNumber = "<h3> Question #" + questionArr[i].number + "</h3>";
             var question = "<h4>" + questionArr[i].question + "</h4>";
-            var answerOption = "<select data-placeholder='' class='chosen-select' id=" + questionArr[i].number + ">"
+            var answerOption = "<select data-placeholder='' class='chosen-value' id=" + questionArr[i].number + ">"
                     + "<option value=''></option>"
                     + "<option value='1'>1 (Strongly Disagree)</option>"
                     + "<option value='2'>2</option>"
@@ -103,6 +104,23 @@
             var newDiv = $("<div>");
             $("#questionDiv").append(newDiv).append(questionNumber).append(question).append(answerOption);
         }
+
+        $("#submit").on("click", function(){
+        function validateForm() {
+            var isValid = true;
+            $(".form-control").each(function(){
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+
+            $(".chosen-value").each(function(){
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+        }
+    })
 
 
     </script>
