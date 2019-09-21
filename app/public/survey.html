@@ -11,60 +11,73 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>SurveyPage</title>
 </head>
 
 <body>
-    <a href="/home">Home Page</a>
+    <div class="row">
+        <div class="col-12">
+            <a href="/home" class="float-left fa fa-home fa-3x"></a>
+            <h1 class="text-right socialMedia"><a href="https://www.linkedin.com/in/devin-stewart-7697bb9b/"
+                    class="fa fa-linkedin"></a><a href="https://www.github.com/bigshmow" class="fa fa-github"></a></h1>
+        </div>
+    </div>
 
     <div class="container">
         <div class="jumbotron">
-            <h1 class="header">Survey Questions</h1>
-            <br>
-            <h2 class="">A little about you first:</h2>
-            <h3 class="">Name</h3>
-            <input type="text" class="form-control" id="name">
-
-            <h3 class="">Link to an image of you</h3>
-            <input type="text" class="form-control" id="photo">
+            <h1 class="header text-center">Survey Questions</h1>
+            <br><hr>
+            <h2>first, a little about yourself:</h2>
+            <hr><br>
+            <h4 class="">Your Name:</h4>
+            <input type="text" class="form-control" placeholder="First and Last" id="name">
+            <h4 class="">Link to an image of you:</h4>
+            <input type="text" class="form-control" placeholder="Make it a good one!"id="photo">
         </div>
         <div class="jumbotron" id="questionDiv">
+            <div>
+                <h1 class="text-center">Answer honestly for the best outcome!</h1>
+                <hr><br>
+            </div>
 
         </div>
 
         <br><br>
 
-        <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit" data-toggle="modal" data-target="#submitAnswers">Submit</button>
+        <button type="submit" class="btn btn-success btn-lg btn-block" id="submit" data-toggle="modal"
+            data-target="#submitAnswers">Submit</button>
 
     </div>
 
+    <br><br><br>
     <footer class="footer">
         <div class="container">
-            <p><a href="api/friends">API Friends List</a></p>
+            <p class="text-center"><a href="/api/friends">Check out a list of our default Friends here!</a></p>
         </div>
     </footer>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="submitAnswers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+    <!-- Modal -->
+    <div class="modal fade" id="submitAnswers" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLongTitle">Here's your best match!</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLongTitle">Here's your best match!</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3 id="matchName"></h3>
+                    <img id="matchImage" src="#" alt="Best Match Picture">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <h3 id = "matchName"></h3>
-                <img id = "matchImage" src = "#" alt = "Best Match Picture">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <script>
         var questionArr = [{
@@ -125,7 +138,7 @@
             $("#questionDiv").append(newDiv).append(questionNumber).append(question).append(answerOption);
         }
 
-        $(document).on("click","#submit", function () {
+        $(document).on("click", "#submit", function () {
             function validateForm() {
                 var isValid = true;
                 $(".form-control").each(function () {
@@ -145,30 +158,30 @@
             if (validateForm()) {
 
                 var newFriend = {
-                        name: $("#name").val(),
-                        photo: $("#photo").val(),
-                        scores: [
-                            $("#q1").val(),
-                            $("#q2").val(),
-                            $("#q3").val(),
-                            $("#q4").val(),
-                            $("#q5").val(),
-                            $("#q6").val(),
-                            $("#q7").val(),
-                            $("#q8").val(),
-                            $("#q9").val(),
-                            $("#q10").val()
-                        ]
-                    };
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q10").val()
+                    ]
+                };
 
                 var currentURL = window.location.origin;
 
-                $.post(currentURL + "/api/friends",newFriend,function(data){
+                $.post(currentURL + "/api/friends", newFriend, function (data) {
                     console.log(newFriend);
                     $("#matchName").text(data.name);
-                    $("#matchImage").attr("src",data.photo);
+                    $("#matchImage").attr("src", data.photo);
                 });
-                
+
             }
         })
     </script>
