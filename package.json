@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Bigshmow/FriendFinder#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jsdom": "^15.1.1"
   }
 }
